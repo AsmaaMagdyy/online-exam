@@ -1,0 +1,15 @@
+::ng-deep {
+  .p-menubar-root-list{
+  justify-content: end !important;
+
+  width: 100% !important;
+}
+.p-menubar-item-link {
+    color: #4461F2 !important;
+    font-size: 20px !important;
+    padding: var(--p-menubar-item-padding);
+}
+ .p-menubar-end{
+    background-color: aqua !important;
+}
+}

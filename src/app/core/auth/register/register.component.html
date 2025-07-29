@@ -1,0 +1,137 @@
+<div class="container mx-auto w-[410px] flex flex-col justify-center">
+  <h2 class="auth mb-6 ">Sign up</h2>
+  <form [formGroup]="registerForm" class="flex flex-col gap-6  justify-center items-stretch" (ngSubmit)="submit()">
+    <div>
+      @let userNameControl = registerForm.get('username');
+      <input [class]="{
+        'ng-invalid': (userNameControl?.errors && (userNameControl?.dirty || userNameControl?.touched)),
+        'ng-dirty': (userNameControl?.errors && (userNameControl?.dirty || userNameControl?.touched))
+      }" class="w-full focus:!border-maincolor focus:!border-2" formControlName="username" type="text" pInputText
+        variant="filled" placeholder="User name" />
+
+      @if (userNameControl?.errors && (userNameControl?.dirty || userNameControl?.touched)) {
+      @if (userNameControl?.hasError('required')) {
+      <p class="text-red-500 mt-1">User name is required</p>
+      }
+      @if (userNameControl?.hasError('pattern')) {
+      <p class="text-red-500 mt-1">Must be at least 6 chars</p>
+      }
+      }
+    </div>
+    <div>
+      @let firstNameControl = registerForm.get('firstName');
+      <input [class]="{
+        'ng-invalid': (firstNameControl?.errors && (firstNameControl?.dirty || firstNameControl?.touched)),
+        'ng-dirty': (firstNameControl?.errors && (firstNameControl?.dirty || firstNameControl?.touched))
+      }" class="w-full focus:!border-maincolor focus:!border-2" formControlName="firstName" type="text" pInputText
+        variant="filled" placeholder="First Name" />
+
+      @if (firstNameControl?.errors && (firstNameControl?.dirty || firstNameControl?.touched)) {
+      @if (firstNameControl?.hasError('required')) {
+      <p class="text-red-500 mt-1">First name is required</p>
+      }
+      @if (firstNameControl?.hasError('pattern')) {
+      <p class="text-red-500 mt-1">First name must contain only letters</p>
+      }
+
+      }
+    </div>
+    <div>
+      @let lastNameControl = registerForm.get('lastName');
+      <input [class]="{
+        'ng-invalid': (lastNameControl?.errors && (lastNameControl?.dirty || lastNameControl?.touched)),
+        'ng-dirty': (lastNameControl?.errors && (lastNameControl?.dirty || lastNameControl?.touched))
+      }" class="w-full focus:!border-maincolor focus:!border-2" formControlName="lastName" type="text" pInputText
+        variant="filled" placeholder="Last Name" />
+
+      @if (lastNameControl?.errors && (lastNameControl?.dirty || lastNameControl?.touched)) {
+      @if (lastNameControl?.hasError('required')) {
+      <p class="text-red-500 mt-1">Last name is required</p>
+      }
+      @if (lastNameControl?.hasError('pattern')) {
+      <p class="text-red-500 mt-1">Last name must contain only letters</p>
+      }
+
+      }
+    </div>
+    <div>
+      @let emailControl = registerForm.get('email');
+      <input [class]="{
+        'ng-invalid': (emailControl?.errors && (emailControl?.dirty || emailControl?.touched)),
+        'ng-dirty': (emailControl?.errors && (emailControl?.dirty || emailControl?.touched))
+      }" class="w-full focus:!border-maincolor focus:!border-2" formControlName="email" type="email" pInputText
+        variant="filled" placeholder="Email" />
+
+      @if (emailControl?.errors && (emailControl?.dirty || emailControl?.touched)) {
+      @if (emailControl?.hasError('required')) {
+      <p class="text-red-500 mt-1">Email is required</p>
+      }
+      @if (emailControl?.hasError('email')) {
+      <p class="text-red-500 mt-1">Enter Valid Email</p>
+      }
+      }
+    </div>
+
+    <div>
+      @let passwordControl = registerForm.get('password');
+      <p-iconfield iconPosition="right" styleClass="!cursor-pointer">
+        <input [class]="{
+        'ng-invalid': (passwordControl?.errors && (passwordControl?.dirty || passwordControl?.touched)),
+        'ng-dirty': (passwordControl?.errors && (passwordControl?.dirty || passwordControl?.touched))
+      }" class="w-full focus:!border-maincolor focus:!border-2" formControlName="password"
+          [type]="typePass?'text':'password'" pInputText variant="filled" placeholder="Password" />
+        <p-inputicon (click)="showPassword()" [styleClass]="typePass?'pi pi-eye-slash ':'pi pi-eye' " />
+      </p-iconfield>
+
+      @if (passwordControl?.errors && (passwordControl?.dirty ||
+      passwordControl?.touched)) {
+      @if (passwordControl?.hasError('required')) {
+      <p class="text-red-500 mt-1">password is required</p>
+      }
+      @if (passwordControl?.hasError('pattern')) {
+      <p class="text-red-500 mt-1">It must be at least 8 characters long and start with an uppercase letter followed by
+        a lowercase letter and must contain a number and a symbol for either /#?!&#64;$%^&*-/</p>
+      }
+      }
+    </div>
+    <div>
+      @let repasswordControl = registerForm.get('rePassword');
+      <p-iconfield iconPosition="right" styleClass="!cursor-pointer">
+        <input [class]="{
+        'ng-invalid': (registerForm.hasError('mismatch') && (repasswordControl?.dirty || repasswordControl?.touched)),
+        'ng-dirty': (registerForm.hasError('mismatch') && (repasswordControl?.dirty || repasswordControl?.touched))
+      }" class="w-full focus:!border-maincolor focus:!border-2" formControlName="rePassword"
+          [type]="typePass?'text':'password'" pInputText variant="filled" placeholder="Confirm Password" />
+        <p-inputicon (click)="showPassword()" [styleClass]="typePass?'pi pi-eye-slash ':'pi pi-eye' "
+          styleClass="!cursor-pointer" />
+      </p-iconfield>
+      @if (registerForm.hasError('mismatch') && (repasswordControl?.dirty ||
+      repasswordControl?.touched)) {
+
+      <p class="text-red-500 mt-1">Password confirmation is incorrect</p>
+
+      }
+    </div>
+    <div>
+      @let phoneControl = registerForm.get('phone');
+      <input [class]="{
+        'ng-invalid': (phoneControl?.errors && (phoneControl?.dirty || phoneControl?.touched)),
+        'ng-dirty': (phoneControl?.errors && (phoneControl?.dirty || phoneControl?.touched))
+      }" class="w-full focus:!border-maincolor focus:!border-2" formControlName="phone" type="tel" pInputText
+        variant="filled" placeholder="Phone" />
+
+      @if (phoneControl?.errors && (phoneControl?.dirty || phoneControl?.touched)) {
+      @if (phoneControl?.hasError('required')) {
+      <p class="text-red-500 mt-1">Phone is required</p>
+      }
+      @if (phoneControl?.hasError('pattern')) {
+      <p class="text-red-500 mt-1">Accept only egypt phone numbers</p>
+      }
+      }
+    </div>
+    <span class="text-[#313131] self-center text-end">Already have an account? <a class="text-maincolor cursor-pointer"
+        routerLink="/login">Login</a></span>
+    <app-blue-button label="Create Account"></app-blue-button>
+  </form>
+  <app-social-media></app-social-media>
+</div>
