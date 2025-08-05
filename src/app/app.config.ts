@@ -6,11 +6,12 @@ import { provideClientHydration, withEventReplay } from '@angular/platform-brows
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { providePrimeNG } from 'primeng/config';
 import Aura from '@primeng/themes/aura';
-import { provideHttpClient, withFetch } from '@angular/common/http';
+import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideToastr } from 'ngx-toastr';
 import { BASE_URL } from 'authLib';
 import { environment } from './core/environment/environment';
+import { headersInterceptor } from './core/interceptors/headers.interceptor';
 
 export const appConfig: ApplicationConfig = {
     providers: [
@@ -18,7 +19,7 @@ export const appConfig: ApplicationConfig = {
             provide:BASE_URL,
             useValue:environment.baseUrl
         },
-        provideHttpClient(withFetch()),
+        provideHttpClient(withFetch(), withInterceptors([headersInterceptor])),
         provideAnimationsAsync(),
         providePrimeNG({
             theme: {
@@ -32,5 +33,6 @@ export const appConfig: ApplicationConfig = {
         provideClientHydration(withEventReplay()),
         provideRouter(routes, withHashLocation(),withInMemoryScrolling({
         scrollPositionRestoration: 'enabled', 
-      }))]
+      }))
+    ]
 };

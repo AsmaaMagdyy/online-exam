@@ -10,4 +10,7 @@ import { ButtonModule } from 'primeng/button';
 export class BlueButtonComponent {
 
   label =input.required<string>();
+  marginTop =input<string>();
+  paddingBlock =input<string>();
+  paddingInline =input<string>();
 }

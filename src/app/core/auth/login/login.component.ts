@@ -42,7 +42,7 @@ export class LoginComponent implements OnDestroy {
             localStorage.setItem('onlineExamToken', res.token);
             this.toastr.success('Success  and navigate to home in 2 seconds ');
             setTimeout(() => {
-              this._router.navigate(['/home']);
+              this._router.navigate(['/dashboard']);
             }, 2000);
           }
         }

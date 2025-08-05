@@ -1,4 +1,4 @@
-::ng-deep {
+:host ::ng-deep {
   .p-menubar-root-list{
   justify-content: end !important;
 
@@ -9,7 +9,5 @@
     font-size: 20px !important;
     padding: var(--p-menubar-item-padding);
 }
- .p-menubar-end{
-    background-color: aqua !important;
-}
+
 }

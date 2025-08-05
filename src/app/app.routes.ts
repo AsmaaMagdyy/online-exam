@@ -1,4 +1,6 @@
 import { Routes } from '@angular/router';
+import { logedGuard } from './core/guards/loged.guard';
+import { authGuard } from './core/guards/auth.guard';
 
 export const routes: Routes = [
     {
@@ -11,8 +13,10 @@ export const routes: Routes = [
     },
     {
         path: "", loadComponent: () => import('./core/layouts/main-layout/main-layout.component').then(m => m.MainLayoutComponent), children: [
-            { path: '', redirectTo: 'home', pathMatch: 'full' },
-            { path: 'home', loadComponent: () => import('./features/pages/home/home.component').then(m => m.HomeComponent) },
+            { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+            { path: 'dashboard', loadComponent: () => import('./features/pages/dash-board/dash-board.component').then(m => m.DashBoardComponent) },
+            { path: 'quizhistory', loadComponent: () => import('./features/pages/quiz-history/quiz-history.component').then(m => m.QuizHistoryComponent) },
+            { path: 'exams', loadComponent: () => import('./features/pages/exams/exams.component').then(m => m.ExamsComponent) },
 
         ]
     },
