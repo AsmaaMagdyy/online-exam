@@ -3,6 +3,7 @@ import { MenuItem } from 'primeng/api';
 import { Menubar } from 'primeng/menubar';
 import { AvatarModule } from 'primeng/avatar';
 import { Router } from '@angular/router';
+import { AuthLibService } from 'authLib';
 
 
 @Component({
@@ -14,6 +15,7 @@ import { Router } from '@angular/router';
 export class SmallScreenNavBarComponent {
   items: MenuItem[] | undefined;
   _router = inject(Router);
+  _authLibService=inject(AuthLibService);
 
 
   ngOnInit() {
@@ -39,18 +41,16 @@ export class SmallScreenNavBarComponent {
 
       },
       {
-        label: ` <a class="flex items-center gap-5 cursor-pointer p-2" (click)="logout()">
+        label: ` <a class="flex items-center gap-5 cursor-pointer p-2">
         <i class="fa-solid fa-arrow-right-from-bracket"></i>
         <span>Log Out</span>
 
     </a>`,
+    command: () => this._authLibService.logout()
 
       }
     ]
   }
 
-  logout(): void {  
-    localStorage.removeItem('onlineExamToken');
-    this._router.navigate(['/login']);
-  }
+
 }

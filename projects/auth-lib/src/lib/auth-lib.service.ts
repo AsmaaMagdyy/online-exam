@@ -6,6 +6,7 @@ import { AuthApiAdaptorService } from './adaptor/auth-api-adaptor.service';
 import { AuthEndPoints } from './enums/AuthEndPoints';
 import { Iauth,IforgotPassword, IresetCode, IresetPass } from './interfaces/auth-interfaces';
 import { BASE_URL } from './base-url';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,7 @@ export class AuthLibService implements AuthApi{
   _httpClient=inject(HttpClient);
   _authApiAdaptorService=inject(AuthApiAdaptorService);
   _base_URL=inject(BASE_URL);
+  _router = inject(Router);
 
    login(data: any): Observable<Iauth> {
     return this._httpClient.post(this._base_URL + AuthEndPoints.LOGIN,data)
@@ -32,7 +34,7 @@ export class AuthLibService implements AuthApi{
       
     )
   }
-  forgotPassword(data: any): Observable<(IforgotPassword)> {
+  forgotPassword(data: any): Observable<IforgotPassword> {
     return this._httpClient.post(this._base_URL + AuthEndPoints.FORGOTPASS,data)
     .pipe(
       map(res => res as IforgotPassword),
@@ -55,5 +57,10 @@ export class AuthLibService implements AuthApi{
       catchError(err=> of(err))
       
     )
+  }
+  logout(): void {
+    localStorage.removeItem('onlineExamToken');
+    this._router.navigate(['/login']);
+    
   }
 }

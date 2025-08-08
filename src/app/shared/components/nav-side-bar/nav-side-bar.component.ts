@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { AuthLibService } from 'authLib';
 
 @Component({
   selector: 'app-nav-side-bar',
@@ -9,9 +10,8 @@ import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 })
 export class NavSideBarComponent {
   _router = inject(Router);
+  _authLibService=inject(AuthLibService);
 
-  logout(): void {
-    localStorage.removeItem('onlineExamToken');
-    this._router.navigate(['/login']);
-  }
+  
+ 
 }
