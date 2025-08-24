@@ -12,27 +12,35 @@ import { provideToastr } from 'ngx-toastr';
 import { BASE_URL } from 'authLib';
 import { environment } from './core/environment/environment';
 import { headersInterceptor } from './core/interceptors/headers.interceptor';
+import { provideStore } from '@ngrx/store';
+import { provideEffects } from '@ngrx/effects';
+import { questionsReducer } from './store/questions/questions.reducer';
+import { questionsEffects } from './store/questions/questions.effects';
 
 export const appConfig: ApplicationConfig = {
     providers: [
-        {
-            provide:BASE_URL,
-            useValue:environment.baseUrl
-        },
-        provideHttpClient(withFetch(), withInterceptors([headersInterceptor])),
-        provideAnimationsAsync(),
-        providePrimeNG({
-            theme: {
-                preset: Aura
-            }
-        }),
-        provideAnimations(),
-        provideToastr(),
-        provideZoneChangeDetection({ eventCoalescing: true }),
-        provideRouter(routes),
-        provideClientHydration(withEventReplay()),
-        provideRouter(routes, withHashLocation(),withInMemoryScrolling({
-        scrollPositionRestoration: 'enabled', 
-      }))
-    ]
+    {
+        provide: BASE_URL,
+        useValue: environment.baseUrl
+    },
+    provideHttpClient(withFetch(), withInterceptors([headersInterceptor])),
+    provideAnimationsAsync(),
+    providePrimeNG({
+        theme: {
+            preset: Aura
+        }
+    }),
+    provideAnimations(),
+    provideToastr(),
+    provideZoneChangeDetection({ eventCoalescing: true }),
+    provideRouter(routes),
+    provideClientHydration(withEventReplay()),
+    provideRouter(routes, withHashLocation(), withInMemoryScrolling({
+        scrollPositionRestoration: 'enabled',
+    })),
+    provideStore({
+        questions:questionsReducer
+    }),
+    provideEffects([questionsEffects])
+]
 };

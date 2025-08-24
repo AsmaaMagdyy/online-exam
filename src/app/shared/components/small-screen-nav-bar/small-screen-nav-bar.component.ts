@@ -1,21 +1,24 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { Menubar } from 'primeng/menubar';
 import { AvatarModule } from 'primeng/avatar';
 import { Router } from '@angular/router';
 import { AuthLibService } from 'authLib';
+import { Subscription } from 'rxjs';
 
 
 @Component({
   selector: 'app-small-screen-nav-bar',
-  imports: [Menubar,AvatarModule],
+  imports: [Menubar, AvatarModule],
   templateUrl: './small-screen-nav-bar.component.html',
   styleUrl: './small-screen-nav-bar.component.scss'
 })
-export class SmallScreenNavBarComponent {
+export class SmallScreenNavBarComponent implements OnInit,OnDestroy{
   items: MenuItem[] | undefined;
   _router = inject(Router);
-  _authLibService=inject(AuthLibService);
+  _authLibService = inject(AuthLibService);
+  logOutSub!: Subscription;
+
 
 
   ngOnInit() {
@@ -29,7 +32,7 @@ export class SmallScreenNavBarComponent {
         <i class="fa-solid fa-table-list"></i>
         <span>Dashboard</span>
 
-    </a>`,routerLink:['/dashboard']
+    </a>`, routerLink: ['/dashboard']
 
       },
       {
@@ -37,7 +40,7 @@ export class SmallScreenNavBarComponent {
         <i class="fa-solid fa-clock-rotate-left"></i>
         <span>Quiz History</span>
 
-    </a> `,routerLink:['/quizhistory']
+    </a> `, routerLink: ['/quizhistory']
 
       },
       {
@@ -46,10 +49,28 @@ export class SmallScreenNavBarComponent {
         <span>Log Out</span>
 
     </a>`,
-    command: () => this._authLibService.logout()
+        command: () => this.logout()
 
       }
     ]
+  }
+
+  logout(): void {
+    this.logOutSub = this._authLibService.logOut().subscribe({
+      next: (res) => {
+        if (res.message == "success") {
+          localStorage.removeItem('onlineExamToken');
+          this._router.navigate(['/login']);
+          console.log('from lib logout')
+
+        }
+      }
+    })
+
+  }
+
+    ngOnDestroy(): void {
+    this.logOutSub?.unsubscribe();
   }
 
 

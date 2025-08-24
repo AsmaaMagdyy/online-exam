@@ -1,0 +1,48 @@
+<p-dialog [closable]="false" [modal]="true" [(visible)]="visible" [style]="{ width: '60rem' }">
+
+    <div class="flex flex-col gap-7">
+        <div class="w-full flex justify-between items-center">
+            <span class="font-roboto font-medium text-sm text-maincolor">Question {{counter+1}} of
+                {{questionsArrLength}}</span>
+            <div class="flex items-center justify-center gap-2">
+                <img src="/images/image 2.png" class="w-6" alt="clock">
+                <span class="font-roboto text-xl" [class]="{
+                            'text-[#11CE19]': remainingTime >= '05:00',
+                             'text-red-600': remainingTime < '05:00' }">{{remainingTime}}</span>
+            </div>
+        </div>
+        <div class="flex items-center gap-5">
+            @for (item of questionsList; track $index) {
+            <span class="size-2.5 rounded-full " [class]="{
+                        'bg-maincolor': $index <= counter,
+                        'bg-[#D9D9D9]': $index > counter}"></span>
+            }
+        </div>
+        <div class="font-inter text-[#0F0F0F]">
+            <p class="font-medium text-2xl">{{currentQuestion.question}}</p>
+            <div class="text-xl flex flex-col gap-3 mt-3">
+                @for (answer of currentQuestion.answers; track $index) {
+                <label [for]="answer.key"
+                    class=" ms-3 cursor-pointer p-4 rounded-[10px]  flex items-center gap-2 has-checked:bg-checked not-checked:bg-notchecked">
+                    <input class="accent-[#02369C]" type="radio" [name]="'question-' + counter" [value]="answer.key"
+                        [(ngModel)]="selectedAnswers[counter]" [id]="answer.key" (change)="userChoice(answer.key)" />
+                    {{answer.answer}}
+                </label>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="flex gap-2 w-full items-center justify-between mt-8">
+        <div class="w-[44.5%]">
+            <p-button (onClick)="prevQuestion()"
+                styleClass="!font-roboto !text-lg !font-medium !bg-white !border-2 border-solid border-maincolor w-full !py-3 !text-maincolor disabled:!cursor-not-allowed"
+                label="Back" [rounded]="true" [disabled]="counter === 0" />
+
+        </div>
+        <div class="w-[44.5%]">
+            <p-button (onClick)="nextQuestion()"
+                styleClass="!font-roboto custom-disabled-button !text-lg !font-medium  !border-2 border-solid  w-full !py-3 "
+                label="Next" [rounded]="true" [disabled]="!selectedAnswers[counter]" />
+        </div>
+    </div>
+</p-dialog>

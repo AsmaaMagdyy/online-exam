@@ -1,0 +1,18 @@
+<div>
+    @if (control()?.errors && (control()?.dirty || control()?.touched)) {
+    @if (control()?.hasError('required')) {
+    <p class="text-red-500 mt-1">{{fieldName()}} is required</p>
+    }
+    @if (control()?.hasError('email')) {
+    <p class="text-red-500 mt-1">Enter Valid {{fieldName()}}</p>
+    }
+    @if (control()?.hasError('pattern')) {
+    <p class="text-red-500 mt-1">{{message()}}</p>
+    }
+
+
+    }
+    
+
+
+</div>

@@ -1,27 +1,51 @@
 <section class="mt-5">
-    <h4 class="font-medium text-lg text-[#0F0F0F]">{{examName()}} Quiz</h4>
+    <h4 class="font-medium text-lg text-[#0F0F0F] ms-3 md:ms-0"> {{examName()}} Quiz</h4>
     <div class="flex flex-col justify-center items-center gap-6 mt-10 font-inter">
         @for (exam of examsList(); track exam._id) {
         <div class="bg-white rounded-[10px] px-6 py-4 w-full text-[#0F0F0F] shadow-[0_15px_40px_0_#2A29290D]">
-           <div class="flex justify-between items-center">
-            <i class="fa-solid fa-file-code fa-4x text-maincolor"></i>
-            <div class="flex justify-between items-center w-[90%]">
-                <div class="flex flex-col justify-between items-start">
-                    <h6 class="font-medium text-[16px]">{{exam.title}}</h6>
-                    <span class="text-[#535353] text-[13px]">{{exam.numberOfQuestions}} Questions</span>
-                </div>
-                <div class="flex flex-col justify-between items-center">
-                    <span class="text-[13px]">{{exam.duration}} Minutes</span>
-                   <p-button label="Start" [rounded]="true" severity="success" />
+            <div class="flex justify-between items-center">
+                <i class="fa-solid fa-file-code fa-4x text-maincolor"></i>
+                <div class="flex justify-between items-center w-[90%]">
+                    <div class="flex flex-col justify-between items-start">
+                        <h6 class="font-medium text-[16px]">{{exam.title}}</h6>
+                        <span class="text-[#535353] text-[13px]">{{exam.numberOfQuestions}} Questions</span>
+                    </div>
+                    <div class="flex flex-col justify-between items-center">
+                        <span class="text-[13px]">{{exam.duration}} Minutes</span>
+                        <p-button (click)="showDialog( exam._id , exam)" label="Start" [rounded]="true"
+                            severity="success" />
+                        <p-dialog header="Instructions" [modal]="true" [(visible)]="visible" [closable]="false"
+                            [style]="{ width: '30rem' }">
+                            <ul class="list-disc ms-6">
+                                <li>Lorem ipsum dolor sit amet consectetur.</li>
+                                <li>Lorem ipsum dolor sit amet consectetur.</li>
+                                <li>Lorem ipsum dolor sit amet consectetur.</li>
+                                <li>Lorem ipsum dolor sit amet consectetur.</li>
+                            </ul>
+                            <app-blue-button (click)="showExam()" label="Start"></app-blue-button>
+
+                        </p-dialog>
+
+
+                    </div>
                 </div>
             </div>
-           </div>
         </div>
-    
+
         }
         @empty {
-            <p class="text-center">There are no Quizzes.</p>
+        <p class="text-center">There are no Quizzes.</p>
         }
+
     </div>
+    @if (examVisible == true) {
+    <app-questions [examInfo]="exam" (done)="onQuestionsDone()"></app-questions>
+    }
+    @if (scoreVisible == true) {
+  <app-score (back)="onBackToQuestions()" (showResult)="showResults()"></app-score>
+    }
+    @if (finalResultVisible == true) {
+  <app-show-wrong-user-results (done)="onResultsShowDone()"></app-show-wrong-user-results>
+    }
 
 </section>

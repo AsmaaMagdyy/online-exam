@@ -1,9 +1,12 @@
 <section class="grid grid-cols-1 lg:grid-cols-2 gap-2 ">
         <div class="hidden lg:block">
-        <app-auth-side-bar></app-auth-side-bar>
+                <app-auth-side-bar></app-auth-side-bar>
         </div>
         <div>
-        <app-navbar></app-navbar>
-        <router-outlet></router-outlet>
+                <app-navbar></app-navbar>
+                <div>
+                        <router-outlet></router-outlet>
+                        <app-social-media></app-social-media>
+                </div>
         </div>
 </section>

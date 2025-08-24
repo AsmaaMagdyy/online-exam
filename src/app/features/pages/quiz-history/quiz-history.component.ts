@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-quiz-history',
@@ -6,6 +6,9 @@ import { Component } from '@angular/core';
   templateUrl: './quiz-history.component.html',
   styleUrl: './quiz-history.component.scss'
 })
-export class QuizHistoryComponent {
+export class QuizHistoryComponent{
+
+
+  
 
 }

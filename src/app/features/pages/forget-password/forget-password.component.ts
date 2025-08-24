@@ -1,19 +1,22 @@
 import { Component, inject, OnDestroy } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { InputTextModule } from 'primeng/inputtext';
 import { BlueButtonComponent } from "../../../shared/components/blue-button/blue-button.component";
 import { AuthLibService } from 'authLib';
 import { ToastrService } from 'ngx-toastr';
-import { SocialMediaComponent } from "../../../shared/components/social-media/social-media.component";
 import { LoggingService } from '../../../core/services/logging.service';
 import { Subscription } from 'rxjs';
 import { IconField } from "primeng/iconfield";
 import { InputIcon } from "primeng/inputicon";
+import { InputTextModule } from 'primeng/inputtext';
+import { InputErrorComponent } from "../../../shared/components/input-error/input-error.component";
+import { confirmPasswordValidator } from '../../../shared/validators/custom-validator';
+import { PASSWORD_PATTERN } from '../../../shared/constants/regex-patterns';
+
 
 @Component({
   selector: 'app-forget-password',
-  imports: [ReactiveFormsModule, FormsModule, InputTextModule, RouterLink, BlueButtonComponent, SocialMediaComponent, IconField, InputIcon],
+  imports: [ReactiveFormsModule, FormsModule, RouterLink, InputTextModule, BlueButtonComponent, IconField, InputIcon, InputErrorComponent],
   templateUrl: './forget-password.component.html',
   styleUrl: './forget-password.component.scss'
 })
@@ -38,9 +41,9 @@ export class ForgetPasswordComponent implements OnDestroy {
     resetCode: [null, [Validators.required, Validators.pattern(/^\w{5,6}$/)]],
   })
   resetPasswordForm: FormGroup = this._formBuilder.group({
-    newPassword: [null, [Validators.required, Validators.pattern(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/)]],
+    newPassword: [null, [Validators.required, Validators.pattern(PASSWORD_PATTERN)]],
     rePassword: [null]
-  }, { validators: this.confirmPassword })
+  }, { validators: confirmPasswordValidator })
 
   callForgotPasswordApi(): void {
     this.forgotPasswordSub = this._authLibService.forgotPassword(this.emailForm.value).subscribe({
@@ -98,7 +101,7 @@ export class ForgetPasswordComponent implements OnDestroy {
             localStorage.setItem('onlineExamToken', res.token);
             this.toastr.success('Success and navigate to home in 2 seconds ');
             setTimeout(() => {
-              this._router.navigate(['/home']);
+              this._router.navigate(['/dashboard']);
             }, 2000);
 
           }
@@ -108,13 +111,7 @@ export class ForgetPasswordComponent implements OnDestroy {
       this.resetPasswordForm.markAllAsTouched();
     }
   }
-  confirmPassword(g: AbstractControl) {
-    if (g.get('newPassword')?.value === g.get('rePassword')?.value) {
-      return true;
-    } else {
-      return { mismatch: true }
-    }
-  }
+ 
   showPassword(): void {
     this.typePass = !this.typePass;
   }

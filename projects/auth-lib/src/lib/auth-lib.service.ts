@@ -4,7 +4,7 @@ import { catchError, map, Observable, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { AuthApiAdaptorService } from './adaptor/auth-api-adaptor.service';
 import { AuthEndPoints } from './enums/AuthEndPoints';
-import { Iauth,IforgotPassword, IresetCode, IresetPass } from './interfaces/auth-interfaces';
+import { IAdapt, Iauth,IforgotPassword, IForgotPasswordData, IlogOut, IresetCode, IresetPass, IresetPasswordData, ISignInData, ISignUpData, IVerifyResetPasswordData } from './interfaces/auth-interfaces';
 import { BASE_URL } from './base-url';
 import { Router } from '@angular/router';
 
@@ -18,23 +18,23 @@ export class AuthLibService implements AuthApi{
   _base_URL=inject(BASE_URL);
   _router = inject(Router);
 
-   login(data: any): Observable<Iauth> {
-    return this._httpClient.post(this._base_URL + AuthEndPoints.LOGIN,data)
+   login(data: ISignInData): Observable<IAdapt> {
+    return this._httpClient.post<Iauth>(this._base_URL + AuthEndPoints.LOGIN,data)
     .pipe(
-      map(res=> this._authApiAdaptorService.adapt(res)),
+      map((res:Iauth)=> this._authApiAdaptorService.adapt(res)),
       catchError(err=> of(err))
       
     )
   }
-   register(data: any): Observable<Iauth> {
-    return this._httpClient.post(this._base_URL + AuthEndPoints.REGISTER,data)
+   register(data: ISignUpData): Observable<IAdapt> {
+    return this._httpClient.post<Iauth>(this._base_URL + AuthEndPoints.REGISTER,data)
     .pipe(
-      map(res=> this._authApiAdaptorService.adapt(res)),
+      map((res:Iauth)=> this._authApiAdaptorService.adapt(res)),
       catchError(err=> of(err))
       
     )
   }
-  forgotPassword(data: any): Observable<IforgotPassword> {
+  forgotPassword(data: IForgotPasswordData): Observable<IforgotPassword> {
     return this._httpClient.post(this._base_URL + AuthEndPoints.FORGOTPASS,data)
     .pipe(
       map(res => res as IforgotPassword),
@@ -42,7 +42,7 @@ export class AuthLibService implements AuthApi{
       
     )
   }
-  verifyResetPassword(data: any): Observable<IresetCode> {
+  verifyResetPassword(data: IVerifyResetPasswordData): Observable<IresetCode> {
     return this._httpClient.post(this._base_URL + AuthEndPoints.VERIFYCODE,data)
     .pipe(
       map(res => res as IresetCode),
@@ -50,7 +50,7 @@ export class AuthLibService implements AuthApi{
       
     )
   }
-  resetPassword(data: any): Observable<IresetPass> {
+  resetPassword(data: IresetPasswordData): Observable<IresetPass> {
     return this._httpClient.put(this._base_URL + AuthEndPoints.RESETPASS,data)
     .pipe(
       map(res => res as IresetPass),
@@ -58,9 +58,8 @@ export class AuthLibService implements AuthApi{
       
     )
   }
-  logout(): void {
-    localStorage.removeItem('onlineExamToken');
-    this._router.navigate(['/login']);
+   logOut(): Observable<IlogOut> {
+    return this._httpClient.get<IlogOut>(this._base_URL + AuthEndPoints.LOGOUT);
     
   }
 }

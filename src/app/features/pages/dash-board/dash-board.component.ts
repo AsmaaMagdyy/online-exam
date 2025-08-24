@@ -24,7 +24,7 @@ export class DashBoardComponent implements OnInit, OnDestroy {
   }
 
   getAllSubjects(limit?: number): void {
-    this._subjectsService.getAllSubjects(limit).subscribe({
+    this.getAllSubjectsSub = this._subjectsService.getAllSubjects(limit).subscribe({
       next: (res) => {
         this.subjectsList.set(res);
         this._loggingService.logData(this.subjectsList());

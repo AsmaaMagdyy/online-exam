@@ -1,0 +1,31 @@
+:host ::ng-deep {
+  .p-dialog-header {
+    --p-dialog-header-padding: 10px;
+  }
+  input {
+    &[type="radio"] {
+      width: 20px;
+      height: 20px;
+    }
+    &[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+    }
+  }
+  .custom-disabled-button.p-button:disabled{
+    background-color: #cdcdcd !important; // New background
+    border-color: #cdcdcd !important; // Optional: border
+    color: rgba(0, 0, 0,0.5) !important; // Optional: text color
+    opacity: 1 !important; // Remove grayed-out effect
+    cursor: not-allowed;
+  }
+  
+  .custom-disabled-button.p-button{
+    background-color: var(--color-maincolor) !important; // New background
+    border-color: var(--color-maincolor)!important; // Optional: border
+    color: white !important; // Optional: text color
+   
+  }
+
+  
+}

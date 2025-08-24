@@ -1,18 +1,19 @@
 import { Component, inject, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { InputTextModule } from 'primeng/inputtext';
 import { BlueButtonComponent } from "../../../shared/components/blue-button/blue-button.component";
 import { AuthLibService } from 'authLib';
 import { ToastrService } from 'ngx-toastr';
-import { SocialMediaComponent } from "../../../shared/components/social-media/social-media.component";
 import { Subscription } from 'rxjs';
 import { LoggingService } from '../../services/logging.service';
 import { InputIcon } from 'primeng/inputicon';
 import { IconField } from 'primeng/iconfield';
+import { InputTextModule } from 'primeng/inputtext';
+import { InputErrorComponent } from "../../../shared/components/input-error/input-error.component";
+
 @Component({
   selector: 'app-login',
-  imports: [InputIcon, IconField, ReactiveFormsModule, FormsModule, InputTextModule, RouterLink, BlueButtonComponent, SocialMediaComponent],
+  imports: [InputIcon, IconField, ReactiveFormsModule, InputTextModule, FormsModule, RouterLink, BlueButtonComponent, InputErrorComponent],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })

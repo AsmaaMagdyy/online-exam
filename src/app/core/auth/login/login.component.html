@@ -9,14 +9,7 @@
       }" class="w-full focus:!border-maincolor focus:!border-2" formControlName="email" type="email" pInputText
         variant="filled" placeholder="Enter Email" />
 
-      @if (emailControl?.errors && (emailControl?.dirty || emailControl?.touched)) {
-      @if (emailControl?.hasError('required')) {
-      <p class="text-red-500 mt-1">Email is required</p>
-      }
-      @if (emailControl?.hasError('email')) {
-      <p class="text-red-500 mt-1">Enter Valid Email</p>
-      }
-      }
+      <app-input-error [control]="emailControl" fieldName="Email" />
     </div>
     <div>
       @let passwordControl = loginForm.get('password');
@@ -29,22 +22,15 @@
           [type]="typePass?'text':'password'" pInputText variant="filled" placeholder="Password" />
         <p-inputicon (click)="showPassword()" [styleClass]="typePass?'pi pi-eye-slash ':'pi pi-eye' " />
       </p-iconfield>
-      @if (passwordControl?.errors && (passwordControl?.dirty ||
-      passwordControl?.touched)) {
-      @if (passwordControl?.hasError('required')) {
-      <p class="text-red-500 mt-1">password is required</p>
-      }
-      @if (passwordControl?.hasError('pattern')) {
-      <p class="text-red-500 mt-1">It must be at least 8 characters long and start with an uppercase letter followed by
-        a lowercase letter and must contain a number and a symbol for either /#?!&#64;$%^&*-/</p>
-      }
-      }
+
+      <app-input-error [control]="passwordControl" fieldName="Password" message="It must be at least 8 characters long and start with an uppercase letter followed by
+        a lowercase letter and must contain a number and a symbol for either /#?!&#64;$%^&*-/" />
+
     </div>
 
     <a routerLink="/forgetPassword" class="text-maincolor self-end text-end cursor-pointer ">Recover Password ?</a>
     <app-blue-button label="Sign in"></app-blue-button>
   </form>
-  <app-social-media></app-social-media>
 
 
 

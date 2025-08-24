@@ -1,4 +1,10 @@
-export interface Iexam{
+export interface IExamRes {
+  message: string;
+  metadata: Metadata;
+  exams:Iexam[];
+}
+
+export interface Iexam {
   _id: string;
   title: string;
   duration: number;
@@ -6,4 +12,10 @@ export interface Iexam{
   numberOfQuestions: number;
   active: boolean;
   createdAt: string;
+}
+
+export interface Metadata {
+  currentPage: number;
+  numberOfPages: number;
+  limit: number;
 }

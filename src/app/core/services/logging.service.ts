@@ -5,8 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class LoggingService {
 
-  logData(data:any):void{
+  logData<T>(data: T): void {
     console.log(data);
-    
   }
 }

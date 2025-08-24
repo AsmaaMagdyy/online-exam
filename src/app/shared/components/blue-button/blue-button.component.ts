@@ -13,4 +13,6 @@ export class BlueButtonComponent {
   marginTop =input<string>();
   paddingBlock =input<string>();
   paddingInline =input<string>();
+
+
 }

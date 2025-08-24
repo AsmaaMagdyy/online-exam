@@ -9,14 +9,8 @@
       }" class="w-full focus:!border-maincolor focus:!border-2" formControlName="username" type="text" pInputText
         variant="filled" placeholder="User name" />
 
-      @if (userNameControl?.errors && (userNameControl?.dirty || userNameControl?.touched)) {
-      @if (userNameControl?.hasError('required')) {
-      <p class="text-red-500 mt-1">User name is required</p>
-      }
-      @if (userNameControl?.hasError('pattern')) {
-      <p class="text-red-500 mt-1">Must be at least 6 chars</p>
-      }
-      }
+      <app-input-error [control]="userNameControl" fieldName="User name" message="Must be at least 6 chars" />
+
     </div>
     <div>
       @let firstNameControl = registerForm.get('firstName');
@@ -26,15 +20,9 @@
       }" class="w-full focus:!border-maincolor focus:!border-2" formControlName="firstName" type="text" pInputText
         variant="filled" placeholder="First Name" />
 
-      @if (firstNameControl?.errors && (firstNameControl?.dirty || firstNameControl?.touched)) {
-      @if (firstNameControl?.hasError('required')) {
-      <p class="text-red-500 mt-1">First name is required</p>
-      }
-      @if (firstNameControl?.hasError('pattern')) {
-      <p class="text-red-500 mt-1">First name must contain only letters</p>
-      }
+      <app-input-error [control]="firstNameControl" fieldName="First Name"
+        message="First name must contain only letters" />
 
-      }
     </div>
     <div>
       @let lastNameControl = registerForm.get('lastName');
@@ -44,15 +32,9 @@
       }" class="w-full focus:!border-maincolor focus:!border-2" formControlName="lastName" type="text" pInputText
         variant="filled" placeholder="Last Name" />
 
-      @if (lastNameControl?.errors && (lastNameControl?.dirty || lastNameControl?.touched)) {
-      @if (lastNameControl?.hasError('required')) {
-      <p class="text-red-500 mt-1">Last name is required</p>
-      }
-      @if (lastNameControl?.hasError('pattern')) {
-      <p class="text-red-500 mt-1">Last name must contain only letters</p>
-      }
+      <app-input-error [control]="lastNameControl" fieldName="Last Name"
+        message="Last name must contain only letters" />
 
-      }
     </div>
     <div>
       @let emailControl = registerForm.get('email');
@@ -62,14 +44,7 @@
       }" class="w-full focus:!border-maincolor focus:!border-2" formControlName="email" type="email" pInputText
         variant="filled" placeholder="Email" />
 
-      @if (emailControl?.errors && (emailControl?.dirty || emailControl?.touched)) {
-      @if (emailControl?.hasError('required')) {
-      <p class="text-red-500 mt-1">Email is required</p>
-      }
-      @if (emailControl?.hasError('email')) {
-      <p class="text-red-500 mt-1">Enter Valid Email</p>
-      }
-      }
+      <app-input-error [control]="emailControl" fieldName="Email" />
     </div>
 
     <div>
@@ -83,16 +58,8 @@
         <p-inputicon (click)="showPassword()" [styleClass]="typePass?'pi pi-eye-slash ':'pi pi-eye' " />
       </p-iconfield>
 
-      @if (passwordControl?.errors && (passwordControl?.dirty ||
-      passwordControl?.touched)) {
-      @if (passwordControl?.hasError('required')) {
-      <p class="text-red-500 mt-1">password is required</p>
-      }
-      @if (passwordControl?.hasError('pattern')) {
-      <p class="text-red-500 mt-1">It must be at least 8 characters long and start with an uppercase letter followed by
-        a lowercase letter and must contain a number and a symbol for either /#?!&#64;$%^&*-/</p>
-      }
-      }
+      <app-input-error [control]="passwordControl" fieldName="Password" message="It must be at least 8 characters long and start with an uppercase letter followed by
+        a lowercase letter and must contain a number and a symbol for either /#?!&#64;$%^&*-/" />
     </div>
     <div>
       @let repasswordControl = registerForm.get('rePassword');
@@ -105,12 +72,14 @@
         <p-inputicon (click)="showPassword()" [styleClass]="typePass?'pi pi-eye-slash ':'pi pi-eye' "
           styleClass="!cursor-pointer" />
       </p-iconfield>
-      @if (registerForm.hasError('mismatch') && (repasswordControl?.dirty ||
+     
+     @if (registerForm.hasError('mismatch') && (repasswordControl?.dirty ||
       repasswordControl?.touched)) {
 
       <p class="text-red-500 mt-1">Password confirmation is incorrect</p>
 
       }
+
     </div>
     <div>
       @let phoneControl = registerForm.get('phone');
@@ -120,18 +89,14 @@
       }" class="w-full focus:!border-maincolor focus:!border-2" formControlName="phone" type="tel" pInputText
         variant="filled" placeholder="Phone" />
 
-      @if (phoneControl?.errors && (phoneControl?.dirty || phoneControl?.touched)) {
-      @if (phoneControl?.hasError('required')) {
-      <p class="text-red-500 mt-1">Phone is required</p>
-      }
-      @if (phoneControl?.hasError('pattern')) {
-      <p class="text-red-500 mt-1">Accept only egypt phone numbers</p>
-      }
-      }
+
+      <app-input-error [control]="phoneControl" fieldName="Phone" message="Accept only egypt phone numbers" />
+
+
     </div>
     <span class="text-[#313131] self-center text-end">Already have an account? <a class="text-maincolor cursor-pointer"
         routerLink="/login">Login</a></span>
     <app-blue-button label="Create Account"></app-blue-button>
   </form>
-  <app-social-media></app-social-media>
+
 </div>
