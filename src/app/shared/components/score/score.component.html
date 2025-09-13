@@ -12,9 +12,12 @@
             <div class="flex justify-between items-center text-[#02369c] w-1/2">Correct <span
                     class="text-base w-8 h-8 rounded-full border border-[#02369C] flex justify-center items-center">{{rightChoices}}</span>
             </div>
+            @if (wrongChoices) {
             <div class="flex justify-between items-center text-[#CC1010] w-1/2">Incorrect <span
                     class="text-base w-8 h-8 rounded-full border border-[#CC1010] flex justify-center items-center">{{wrongChoices}}</span>
             </div>
+            }
+
 
         </div>
 
