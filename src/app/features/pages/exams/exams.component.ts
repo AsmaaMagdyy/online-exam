@@ -99,20 +99,20 @@ export class ExamsComponent implements OnInit, OnDestroy {
 
   }
 
-  onQuestionsDone() {
+  onQuestionsDone():void {
     this.examVisible = false;
     this.scoreVisible = true;
   }
 
-  onBackToQuestions() {
+  closeScoreDialog():void {
     this.scoreVisible = false;
-    this.examVisible = true;
+   
   }
   showResults(): void {
     this.scoreVisible = false;
     this.finalResultVisible = true;
   }
-  onResultsShowDone() {
+  onResultsShowDone():void {
     this.finalResultVisible = false;
   }
 

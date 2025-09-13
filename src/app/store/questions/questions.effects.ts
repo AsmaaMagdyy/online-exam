@@ -26,10 +26,10 @@ export class questionsEffects{
             // })
             switchMap((action)=>
             this._questionsService.getAllQuestionsOnExam(action.examId).pipe(
-                // tap((data)=>{
-                //     // console.log('log From Effect');
-                //     // console.log(data);
-                // }),
+                tap((data)=>{
+                    console.log('log From Effect');
+                    console.log(data);
+                }),
                 map((data)=> this._store.dispatch(setQuestions({questions:data})))
             )
             )

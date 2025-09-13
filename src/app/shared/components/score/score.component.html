@@ -1,33 +1,42 @@
- <p-dialog header="Your Score" [closable]="false" [modal]="true" [(visible)]="visible" [style]="{ width: '42.875rem' }">
+<p-dialog header="Your Score" [closable]="false" [modal]="true" [(visible)]="visible" [style]="{ width: '42.875rem' }">
     <div class="flex justify-center items-center gap-8 ">
         <div class="w-1/2 flex justify-center items-center">
             <div class="size-[132px] relative">
-                    <p-chart type="doughnut" [data]="data" [options]="options" class="w-full" />
-                    <span class="absolute top-1/2 left-1/2 -translate-1/2 font-medium text-xl font-inter">{{rightChoicesPercent}}%</span>
+                <p-chart type="doughnut" [data]="data" [options]="options" class="w-full" />
+                <span
+                    class="absolute top-1/2 left-1/2 -translate-1/2 font-medium text-xl font-inter">{{rightChoicesPercent}}%</span>
             </div>
 
         </div>
         <div class="flex flex-col gap-2 w-1/2 justify-center items-start font-inter font-medium text-2xl">
-            <div class="flex justify-between items-center text-[#02369c] w-1/2">Correct <span class="text-base size-8 rounded-full border border-[#02369C] flex justify-center items-center">{{rightChoices}}</span> </div>
-            <div class="flex justify-between items-center text-[#CC1010] w-1/2">Incorrect <span class="text-base size-8 rounded-full border border-[#CC1010] flex justify-center items-center">{{wrongChoices}}</span> </div>
-            
-        </div>
-       
-
-    </div>
-   <div class="flex flex-col gap-7">
-    <div class="flex gap-2 w-full items-center justify-between mt-8">
-        <div class="w-1/2">
-            <p-button (onClick)="back.emit()"
-                styleClass="!font-roboto !text-lg !font-medium !bg-white !border-2 border-solid border-maincolor w-full !py-3 !text-maincolor disabled:!cursor-not-allowed"
-                label="Back" [rounded]="true"  />
+            <div class="flex justify-between items-center text-[#02369c] w-1/2">Correct <span
+                    class="text-base size-8 rounded-full border border-[#02369C] flex justify-center items-center">{{rightChoices}}</span>
+            </div>
+            <div class="flex justify-between items-center text-[#CC1010] w-1/2">Incorrect <span
+                    class="text-base size-8 rounded-full border border-[#CC1010] flex justify-center items-center">{{wrongChoices}}</span>
+            </div>
 
         </div>
-        <div class="w-1/2">
-            <p-button (onClick)="showResult.emit()"
-                styleClass="!font-roboto custom-disabled-button !text-lg !font-medium  !border-2 border-solid  w-full !py-3 "
-                label="Show results" [rounded]="true"  />
+
+
+    </div>
+    <div class="flex flex-col gap-7">
+        <div class="flex gap-2 w-full items-center justify-between mt-8">
+            <div [class]="wrongChoices?'w-1/2':'w-full'">
+                <p-button (onClick)="close.emit()"
+                    styleClass="!font-roboto !text-lg !font-medium !bg-white !border-2 border-solid border-maincolor w-full !py-3 !text-maincolor disabled:!cursor-not-allowed"
+                    label="Close" [rounded]="true" />
+
+            </div>
+            @if (wrongChoices) {
+            <div class="w-1/2">
+                <p-button (onClick)="showResult.emit()"
+                    styleClass="!font-roboto custom-disabled-button !text-lg !font-medium  !border-2 border-solid  w-full !py-3 "
+                    label="Show results" [rounded]="true" />
+            </div>
+
+            }
+
         </div>
     </div>
-   </div>
-    </p-dialog>
+</p-dialog>

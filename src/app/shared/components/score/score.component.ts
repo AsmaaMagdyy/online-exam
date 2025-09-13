@@ -29,7 +29,7 @@ export class ScoreComponent implements OnInit,OnDestroy {
   wrongChoices: number = 0;
   questionsSub!:Subscription; 
   _loggingService=inject(LoggingService);
-  @Output() back = new EventEmitter<void>();
+  @Output() close = new EventEmitter<void>();
   @Output() showResult = new EventEmitter<void>();
 
 

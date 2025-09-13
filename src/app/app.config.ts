@@ -16,6 +16,7 @@ import { provideStore } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
 import { questionsReducer } from './store/questions/questions.reducer';
 import { questionsEffects } from './store/questions/questions.effects';
+import { errorsInterceptor } from './error.interceptor';
 
 export const appConfig: ApplicationConfig = {
     providers: [
@@ -23,7 +24,7 @@ export const appConfig: ApplicationConfig = {
         provide: BASE_URL,
         useValue: environment.baseUrl
     },
-    provideHttpClient(withFetch(), withInterceptors([headersInterceptor])),
+    provideHttpClient(withFetch(), withInterceptors([headersInterceptor,errorsInterceptor])),
     provideAnimationsAsync(),
     providePrimeNG({
         theme: {

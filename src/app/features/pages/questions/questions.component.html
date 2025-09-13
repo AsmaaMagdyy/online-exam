@@ -42,7 +42,7 @@
         <div class="w-[44.5%]">
             <p-button (onClick)="nextQuestion()"
                 styleClass="!font-roboto custom-disabled-button !text-lg !font-medium  !border-2 border-solid  w-full !py-3 "
-                label="Next" [rounded]="true" [disabled]="!selectedAnswers[counter]" />
+                [label]="counter==questionsList.length-1?'Finish':'Next'" [rounded]="true" [disabled]="!selectedAnswers[counter]" />
         </div>
     </div>
 </p-dialog>

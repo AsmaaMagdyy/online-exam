@@ -42,7 +42,7 @@
     <app-questions [examInfo]="exam" (done)="onQuestionsDone()"></app-questions>
     }
     @if (scoreVisible == true) {
-  <app-score (back)="onBackToQuestions()" (showResult)="showResults()"></app-score>
+  <app-score (close)="closeScoreDialog()" (showResult)="showResults()"></app-score>
     }
     @if (finalResultVisible == true) {
   <app-show-wrong-user-results (done)="onResultsShowDone()"></app-show-wrong-user-results>
