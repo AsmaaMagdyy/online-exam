@@ -1,0 +1,22 @@
+
+
+:host ::ng-deep{ 
+.p-button {
+  --p-button-border-radius: 10px;
+  --p-button-padding-x: 24px;
+  --p-button-padding-y: 4px;
+  --p-button-success-background: #4461f2;
+  border: 0 !important;
+  --p-button-success-hover-color: white;
+  --p-button-success-hover-background: rgba(68, 97, 242, 0.8);
+  --p-button-label-font-weight:500;
+  font-size: 12px;
+  --p-button-success-active-background:#4461f2;
+
+}
+
+  .p-dialog-header {
+    --p-dialog-header-padding: 10px;
+  }
+  
+}

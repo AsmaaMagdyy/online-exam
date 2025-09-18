@@ -1,0 +1,21 @@
+p {
+  position: relative;
+  &::before {
+    content: "";
+    width: 133px;
+    height: 1px;
+    background-color: #e7e7e7;
+    position: absolute;
+    bottom: 12px;
+    left: 0;
+  }
+  &::after {
+    content: "";
+    width: 133px;
+    height: 1px;
+    background-color: #e7e7e7;
+    position: absolute;
+    bottom: 12px;
+    right: 0;
+  }
+}

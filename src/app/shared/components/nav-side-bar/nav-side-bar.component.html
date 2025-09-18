@@ -1,0 +1,19 @@
+<div class="flex flex-col gap-8 text-[#696F79] font-semibold text-xl">
+    <img src="images/Final Logo 1.png" class="w-[151px]" alt="logo">
+   <a class="flex items-center gap-5 cursor-pointer p-2"  routerLink="/dashboard" routerLinkActive="bg-maincolor text-white rounded-[10px]">
+        <i class="fa-solid fa-table-list"></i>
+        <span>Dashboard</span>
+
+    </a>
+    <a class="flex items-center gap-5 cursor-pointer p-2" routerLink="/quizhistory" routerLinkActive="bg-maincolor text-white rounded-[10px]">
+        <i class="fa-solid fa-clock-rotate-left"></i>
+        <span>Quiz History</span>
+
+    </a>
+    <a class="flex items-center gap-5 cursor-pointer p-2" (click)="logout()">
+        <i class="fa-solid fa-arrow-right-from-bracket"></i>
+        <span>Log Out</span>
+
+    </a>
+    
+</div>

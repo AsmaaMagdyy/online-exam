@@ -1,0 +1,39 @@
+<p-dialog [closable]="false" [modal]="true" [(visible)]="visible" [style]="{ width: '60rem' }">
+    <div class="font-inter text-[#0F0F0F] pt-5">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-10 ">
+            @for (q of userChoicesAnswers$ |async; track $index) {
+            <div class="bg-[#F9F9F9]  rounded-[10px] px-2 py-4  shadow-[0px_0px_8px_0px_#2A292940] flex flex-col justify-between">
+                <p class="font-medium text-2xl">{{q.question}}</p>
+                <div>
+                     @for (answer of q.answers; track $index) {
+                <div class="text-xl flex flex-col gap-3 mt-3">
+                    <label [for]="answer.key" class="p-4 rounded-[10px]  flex items-center gap-2" [ngClass]="{
+                        'bg-[#CAF9CC] border-2 border-[#11ce19]': answer.key==q.correct,
+                        'bg-[#F8D2D2] border-2 border-[#cc1010]': (answer.key==q.userChoice) && (answer.key !== q.correct),
+                        'bg-[#edeff3]': (answer.key !== q.correct) && (answer.key !== q.userChoice)
+                       
+
+                        }">
+                        <input [disabled]="answer.key!=q.userChoice" [checked]="answer.key==q.userChoice" type="radio"
+                            [name]="'question-' + q._id" [value]="answer.key" [id]="answer.key" [ngClass]="{
+                        'accent-[#11ce19]': answer.key==q.correct,
+                        'accent-[#cc1010]': (answer.key==q.userChoice) && (answer.key !== q.correct)
+                        }" />
+                        {{answer.answer}}
+                    </label>
+
+
+                </div>
+                }
+                </div>
+            </div>
+            }
+            <div class="w-full self-end">
+                <p-button (onClick)="done.emit()"
+                styleClass="!font-inter !rounded-[10px] !bg-maincolor !text-lg !font-medium  !border-2 border-solid  w-full !py-2 !px-6 "
+                    label="Close" />
+
+            </div>
+        </div>
+    </div>
+</p-dialog>

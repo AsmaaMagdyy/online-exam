@@ -1,0 +1,102 @@
+<div class="container mx-auto w-[410px] flex flex-col justify-center">
+  <h2 class="auth mb-6 ">Sign up</h2>
+  <form [formGroup]="registerForm" class="flex flex-col gap-6  justify-center items-stretch" (ngSubmit)="submit()">
+    <div>
+      @let userNameControl = registerForm.get('username');
+      <input [class]="{
+        'ng-invalid': (userNameControl?.errors && (userNameControl?.dirty || userNameControl?.touched)),
+        'ng-dirty': (userNameControl?.errors && (userNameControl?.dirty || userNameControl?.touched))
+      }" class="w-full focus:!border-maincolor focus:!border-2" formControlName="username" type="text" pInputText
+        variant="filled" placeholder="User name" />
+
+      <app-input-error [control]="userNameControl" fieldName="User name" message="Must be at least 6 chars" />
+
+    </div>
+    <div>
+      @let firstNameControl = registerForm.get('firstName');
+      <input [class]="{
+        'ng-invalid': (firstNameControl?.errors && (firstNameControl?.dirty || firstNameControl?.touched)),
+        'ng-dirty': (firstNameControl?.errors && (firstNameControl?.dirty || firstNameControl?.touched))
+      }" class="w-full focus:!border-maincolor focus:!border-2" formControlName="firstName" type="text" pInputText
+        variant="filled" placeholder="First Name" />
+
+      <app-input-error [control]="firstNameControl" fieldName="First Name"
+        message="First name must contain only letters" />
+
+    </div>
+    <div>
+      @let lastNameControl = registerForm.get('lastName');
+      <input [class]="{
+        'ng-invalid': (lastNameControl?.errors && (lastNameControl?.dirty || lastNameControl?.touched)),
+        'ng-dirty': (lastNameControl?.errors && (lastNameControl?.dirty || lastNameControl?.touched))
+      }" class="w-full focus:!border-maincolor focus:!border-2" formControlName="lastName" type="text" pInputText
+        variant="filled" placeholder="Last Name" />
+
+      <app-input-error [control]="lastNameControl" fieldName="Last Name"
+        message="Last name must contain only letters" />
+
+    </div>
+    <div>
+      @let emailControl = registerForm.get('email');
+      <input [class]="{
+        'ng-invalid': (emailControl?.errors && (emailControl?.dirty || emailControl?.touched)),
+        'ng-dirty': (emailControl?.errors && (emailControl?.dirty || emailControl?.touched))
+      }" class="w-full focus:!border-maincolor focus:!border-2" formControlName="email" type="email" pInputText
+        variant="filled" placeholder="Email" />
+
+      <app-input-error [control]="emailControl" fieldName="Email" />
+    </div>
+
+    <div>
+      @let passwordControl = registerForm.get('password');
+      <p-iconfield iconPosition="right" styleClass="!cursor-pointer">
+        <input [class]="{
+        'ng-invalid': (passwordControl?.errors && (passwordControl?.dirty || passwordControl?.touched)),
+        'ng-dirty': (passwordControl?.errors && (passwordControl?.dirty || passwordControl?.touched))
+      }" class="w-full focus:!border-maincolor focus:!border-2" formControlName="password"
+          [type]="typePass?'text':'password'" pInputText variant="filled" placeholder="Password" />
+        <p-inputicon (click)="showPassword()" [styleClass]="typePass?'pi pi-eye-slash ':'pi pi-eye' " />
+      </p-iconfield>
+
+      <app-input-error [control]="passwordControl" fieldName="Password" message="It must be at least 8 characters long and start with an uppercase letter followed by
+        a lowercase letter and must contain a number and a symbol for either /#?!&#64;$%^&*-/" />
+    </div>
+    <div>
+      @let repasswordControl = registerForm.get('rePassword');
+      <p-iconfield iconPosition="right" styleClass="!cursor-pointer">
+        <input [class]="{
+        'ng-invalid': (registerForm.hasError('mismatch') && (repasswordControl?.dirty || repasswordControl?.touched)),
+        'ng-dirty': (registerForm.hasError('mismatch') && (repasswordControl?.dirty || repasswordControl?.touched))
+      }" class="w-full focus:!border-maincolor focus:!border-2" formControlName="rePassword"
+          [type]="typePass?'text':'password'" pInputText variant="filled" placeholder="Confirm Password" />
+        <p-inputicon (click)="showPassword()" [styleClass]="typePass?'pi pi-eye-slash ':'pi pi-eye' "
+          styleClass="!cursor-pointer" />
+      </p-iconfield>
+     
+     @if (registerForm.hasError('mismatch') && (repasswordControl?.dirty ||
+      repasswordControl?.touched)) {
+
+      <p class="text-red-500 mt-1">Password confirmation is incorrect</p>
+
+      }
+
+    </div>
+    <div>
+      @let phoneControl = registerForm.get('phone');
+      <input [class]="{
+        'ng-invalid': (phoneControl?.errors && (phoneControl?.dirty || phoneControl?.touched)),
+        'ng-dirty': (phoneControl?.errors && (phoneControl?.dirty || phoneControl?.touched))
+      }" class="w-full focus:!border-maincolor focus:!border-2" formControlName="phone" type="tel" pInputText
+        variant="filled" placeholder="Phone" />
+
+
+      <app-input-error [control]="phoneControl" fieldName="Phone" message="Accept only egypt phone numbers" />
+
+
+    </div>
+    <span class="text-[#313131] self-center text-end">Already have an account? <a class="text-maincolor cursor-pointer"
+        routerLink="/login">Login</a></span>
+    <app-blue-button label="Create Account"></app-blue-button>
+  </form>
+
+</div>
