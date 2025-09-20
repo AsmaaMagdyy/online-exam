@@ -30,11 +30,9 @@ export class questionsEffects{
                     console.log('log From Effect');
                     console.log(data);
                 }),
-                map((data)=> this._store.dispatch(setQuestions({questions:data})))
+                map((data)=> setQuestions({ questions: data }))
             )
             )
-        ),{
-            dispatch:false
-        }
+        )
     )
 } 
