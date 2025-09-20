@@ -13,11 +13,11 @@ import { questionState } from '../../../store/questions/questions.state';
 
 @Component({
   selector: 'app-score',
-  imports: [Dialog, ButtonModule,ChartModule],
+  imports: [Dialog, ButtonModule, ChartModule],
   templateUrl: './score.component.html',
   styleUrl: './score.component.scss'
 })
-export class ScoreComponent implements OnInit,OnDestroy {
+export class ScoreComponent implements OnInit, OnDestroy {
   visible: boolean = true;
   resultsDialogVisible: boolean = false;
   _store = inject(Store);
@@ -27,8 +27,8 @@ export class ScoreComponent implements OnInit,OnDestroy {
   rightChoices: number = 0;
   rightChoicesPercent: number = 0;
   wrongChoices: number = 0;
-  questionsSub!:Subscription; 
-  _loggingService=inject(LoggingService);
+  questionsSub!: Subscription;
+  _loggingService = inject(LoggingService);
   @Output() close = new EventEmitter<void>();
   @Output() showResult = new EventEmitter<void>();
 
@@ -41,19 +41,21 @@ export class ScoreComponent implements OnInit,OnDestroy {
 
 
   ngOnInit() {
+    this.initScore();
+    this.initChart();
+  }
+  initScore(): void {
     this.questionsSub = this._store.select('questions').subscribe({
       next: (res: questionState) => {
         this.rightChoices = res.questions.length - res.userChoices.length;
         this.wrongChoices = res.userChoices.length;
-        this.rightChoicesPercent = Math.round((this.rightChoices * 100)/res.questions.length);
-       this._loggingService.logData(res.userChoices.length);
-       this._loggingService.logData( res.questions.length);
+        this.rightChoicesPercent = Math.round((this.rightChoices * 100) / res.questions.length);
+        this._loggingService.logData(res.userChoices.length);
+        this._loggingService.logData(res.questions.length);
 
       }
     })
-    this.initChart();
   }
-
   initChart() {
     if (isPlatformBrowser(this.platformId)) {
 
@@ -86,13 +88,13 @@ export class ScoreComponent implements OnInit,OnDestroy {
 
     }
   }
-ngOnDestroy(): void {
+  ngOnDestroy(): void {
     this.questionsSub?.unsubscribe()
-  
-}
+
+  }
 
 
 
- 
+
 
 }

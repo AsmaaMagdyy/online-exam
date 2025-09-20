@@ -13,7 +13,13 @@ export class SubjectsService {
 
 
   getAllSubjects(limit?:number): Observable<Isubject[]> {
-    return this._httpClient.get<ISubjectRes>(`${environment.baseUrl}/subjects?limit=${limit}`)
+    let url:string = ``;
+    if (limit) {
+     url = `${environment.baseUrl}/subjects?limit=${limit}`;
+    } else {
+     url = `${environment.baseUrl}/subjects` 
+    }
+    return this._httpClient.get<ISubjectRes>(url)
         .pipe(map((res:ISubjectRes)=>{
           return res.subjects;
         }))
