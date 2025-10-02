@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, EventEmitter, input, Output } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 
 @Component({
@@ -13,6 +13,11 @@ export class BlueButtonComponent {
   marginTop =input<string>();
   paddingBlock =input<string>();
   paddingInline =input<string>();
+  form =input<boolean>(false);
+ @Output() clicked = new EventEmitter<void>();
 
+  onClick() {
+    this.clicked.emit();
+  }
 
 }

@@ -1,15 +1,13 @@
-import { inject } from "@angular/core";
+import { inject, Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { map, switchMap, tap} from "rxjs";
-import { Store } from "@ngrx/store";
 import { QuestionsService } from "../../core/services/questions/questions.service";
 import { loadQuestions, setQuestions } from "./questions.actions";
 
-
-export class questionsEffects{
+@Injectable()
+export class QuestionsEffects{
     _questionsService=inject(QuestionsService);
     _action=inject(Actions);
-    _store=inject(Store);
     callApi = createEffect(
         ()=>this._action.pipe(
             ofType(loadQuestions),

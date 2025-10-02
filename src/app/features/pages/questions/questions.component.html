@@ -7,8 +7,8 @@
             <div class="flex items-center justify-center gap-2">
                 <img src="/images/image 2.png" class="w-6" alt="clock">
                 <span class="font-roboto text-xl" [class]="{
-                            'text-[#11CE19]': remainingTime >= '05:00',
-                             'text-red-600': remainingTime < '05:00' }">{{remainingTime}}</span>
+                            'text-[#11CE19]': remainingSeconds >= 300,
+                             'text-red-600': remainingSeconds < 300 }">{{remainingTime}}</span>
             </div>
         </div>
         <div class="flex items-center gap-5">
@@ -22,12 +22,14 @@
             <p class="font-medium text-2xl">{{currentQuestion.question}}</p>
             <div class="text-xl flex flex-col gap-3 mt-3">
                 @for (answer of currentQuestion.answers; track $index) {
-                <label [for]="answer.key"
-                    class=" ms-3 cursor-pointer p-4 rounded-[10px]  flex items-center gap-2 has-checked:bg-checked not-checked:bg-notchecked">
+                <div class="flex items-center ms-3 p-4 rounded-[10px] gap-2 has-checked:bg-checked not-checked:bg-notchecked">
                     <input class="accent-[#02369C]" type="radio" [name]="'question-' + counter" [value]="answer.key"
                         [(ngModel)]="selectedAnswers[counter]" [id]="answer.key" (change)="userChoice(answer.key)" />
-                    {{answer.answer}}
-                </label>
+                    <label [for]="answer.key"
+                        class="cursor-pointer w-full">
+                        {{answer.answer}}
+                    </label>
+                </div>
                 }
             </div>
         </div>
@@ -42,7 +44,8 @@
         <div class="w-[44.5%]">
             <p-button (onClick)="nextQuestion()"
                 styleClass="!font-roboto custom-disabled-button !text-lg !font-medium  !border-2 border-solid  w-full !py-3 "
-                [label]="counter==questionsList.length-1?'Finish':'Next'" [rounded]="true" [disabled]="!selectedAnswers[counter]" />
+                [label]="counter==questionsList.length-1?'Finish':'Next'" [rounded]="true"
+                [disabled]="!selectedAnswers[counter]" />
         </div>
     </div>
 </p-dialog>

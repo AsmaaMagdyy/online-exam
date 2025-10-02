@@ -65,6 +65,10 @@ export class RegisterComponent implements OnDestroy {
   showPassword():void {
     this.typePass = !this.typePass;
   }
+   onSignInClick() {
+    this._loggingService.logData('Button clicked!')
+    this.submit();
+  }
   ngOnDestroy(): void {
     this.registerSub?.unsubscribe();
   }

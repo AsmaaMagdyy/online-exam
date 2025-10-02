@@ -14,19 +14,6 @@
                         <span class="text-[13px]">{{exam.duration}} Minutes</span>
                         <p-button (click)="showDialog( exam._id , exam)" label="Start" [rounded]="true"
                             severity="success" />
-                        <p-dialog header="Instructions" [modal]="true" [(visible)]="visible" [closable]="false"
-                            [style]="{ width: '30rem' }">
-                            <ul class="list-disc ms-6">
-                                <li>Lorem ipsum dolor sit amet consectetur.</li>
-                                <li>Lorem ipsum dolor sit amet consectetur.</li>
-                                <li>Lorem ipsum dolor sit amet consectetur.</li>
-                                <li>Lorem ipsum dolor sit amet consectetur.</li>
-                            </ul>
-                            <app-blue-button (click)="showExam()" label="Start"></app-blue-button>
-
-                        </p-dialog>
-
-
                     </div>
                 </div>
             </div>
@@ -38,14 +25,25 @@
         }
 
     </div>
-    @if (examVisible == true) {
+    <p-dialog header="Instructions" [modal]="true" [(visible)]="visible" [closable]="false"
+        [style]="{ width: '30rem' }">
+        <ul class="list-disc ms-6">
+            <li>Lorem ipsum dolor sit amet consectetur.</li>
+            <li>Lorem ipsum dolor sit amet consectetur.</li>
+            <li>Lorem ipsum dolor sit amet consectetur.</li>
+            <li>Lorem ipsum dolor sit amet consectetur.</li>
+        </ul>
+        <app-blue-button [form]="false" (clicked)="showExam()" label="Start"></app-blue-button>
+
+    </p-dialog>
+    @if (view ==='exam') {
     <app-questions [examInfo]="exam" (done)="onQuestionsDone()"></app-questions>
     }
-    @if (scoreVisible == true) {
-  <app-score (close)="closeScoreDialog()" (showResult)="showResults()"></app-score>
+    @if (view ==='score') {
+    <app-score (showResult)="showResults()"></app-score>
     }
-    @if (finalResultVisible == true) {
-  <app-show-wrong-user-results (done)="onResultsShowDone()"></app-show-wrong-user-results>
+    @if (view ==='results') {
+    <app-show-wrong-user-results></app-show-wrong-user-results>
     }
 
 </section>

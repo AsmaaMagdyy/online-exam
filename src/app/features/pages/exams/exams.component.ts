@@ -34,12 +34,11 @@ export class ExamsComponent implements OnInit, OnDestroy {
   examsList: WritableSignal<Iexam[]> = signal([]);
 
   visible: boolean = false;
-  examVisible: boolean = false;
-  scoreVisible: boolean = false;
-  finalResultVisible: boolean = false;
-
+  
+  view!: 'exam' | 'score' | 'results';
   _store = inject(Store);
   exam: Iexam = {} as Iexam;
+
 
 
 
@@ -87,11 +86,7 @@ export class ExamsComponent implements OnInit, OnDestroy {
     this.storeAllQuestionsOnExamInStore(examId);
   }
 
-  showExam() {
-    this.visible = false;
-    this.examVisible = true;
-
-  }
+ 
   storeAllQuestionsOnExamInStore(examId: string) {
 
     this._store.dispatch(loadQuestions({ examId: examId }));
@@ -99,22 +94,22 @@ export class ExamsComponent implements OnInit, OnDestroy {
 
   }
 
-  onQuestionsDone():void {
-    this.examVisible = false;
-    this.scoreVisible = true;
+   showExam():void {
+    this.visible = false;
+    this.view = 'exam';
+
   }
 
-  closeScoreDialog():void {
-    this.scoreVisible = false;
-   
+  onQuestionsDone(): void {
+    this.view = 'score';
+
   }
+
   showResults(): void {
-    this.scoreVisible = false;
-    this.finalResultVisible = true;
+    this.view = 'results';
+
   }
-  onResultsShowDone():void {
-    this.finalResultVisible = false;
-  }
+ 
 
   ngOnDestroy(): void {
     this.getAllExamsOnSubjectSub?.unsubscribe();
