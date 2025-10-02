@@ -29,7 +29,7 @@
     </div>
 
     <a routerLink="/forgetPassword" class="text-maincolor self-end text-end cursor-pointer ">Recover Password ?</a>
-    <app-blue-button label="Sign in"></app-blue-button>
+    <app-blue-button [form]="true" (clicked)="onSignInClick()" label="Sign in"></app-blue-button>
   </form>
 
 

@@ -10,6 +10,7 @@ import { InputIcon } from 'primeng/inputicon';
 import { IconField } from 'primeng/iconfield';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputErrorComponent } from "../../../shared/components/input-error/input-error.component";
+import { PASSWORD_PATTERN } from '../../../shared/constants/regex-patterns';
 
 @Component({
   selector: 'app-login',
@@ -31,7 +32,7 @@ export class LoginComponent implements OnDestroy {
 
   loginForm: FormGroup = this._formBuilder.group({
     email: [null, [Validators.required, Validators.email]],
-    password: [null, [Validators.required, Validators.pattern(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/)]]
+    password: [null, [Validators.required, Validators.pattern(PASSWORD_PATTERN)]]
   })
   submit(): void {
     if (this.loginForm.valid) {
@@ -53,8 +54,12 @@ export class LoginComponent implements OnDestroy {
     }
   }
 
-  showPassword():void{
+  showPassword(): void {
     this.typePass = !this.typePass;
+  }
+  onSignInClick() {
+    this._loggingService.logData('Button clicked!')
+    this.submit();
   }
   ngOnDestroy(): void {
     this.loginSub?.unsubscribe();

@@ -20,11 +20,13 @@ export class ShowWrongUserResultsComponent implements OnInit {
   userChoicesAnswers$!:Observable< IuserChoices[]>;
   _loggingService = inject(LoggingService);
   questionsSub!: Subscription;
-  @Output() done = new EventEmitter<void>();
+
 
   ngOnInit(): void {
     this.userChoicesAnswers$ = this._store.select(selectAllUserChoices);
   }
-
+closeResultsDialog():void {
+    this.visible = false;
+  }
 
 }

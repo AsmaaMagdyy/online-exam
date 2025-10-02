@@ -1,4 +1,3 @@
-<p-button type="submit"
+<p-button [type]="form()?'submit':'button'" (onClick)="onClick()"
     styleClass="!w-full mt-5 !py-3 !font-light !bg-maincolor !border-0 !rounded-[20px] h-full w-full" [label]="label()"
-    [style]="{'margin-top': marginTop(),'padding-inline':paddingInline()}"
-    [raised]="true"/>
+    [style]="{'margin-top': marginTop(),'padding-inline':paddingInline()}" [raised]="true" />

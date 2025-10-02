@@ -15,7 +15,7 @@ import { headersInterceptor } from './core/interceptors/headers.interceptor';
 import { provideStore } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
 import { questionsReducer } from './store/questions/questions.reducer';
-import { questionsEffects } from './store/questions/questions.effects';
+import { QuestionsEffects } from './store/questions/questions.effects';
 import { errorsInterceptor } from './error.interceptor';
 
 export const appConfig: ApplicationConfig = {
@@ -42,6 +42,6 @@ export const appConfig: ApplicationConfig = {
     provideStore({
         questions:questionsReducer
     }),
-    provideEffects([questionsEffects])
+    provideEffects([QuestionsEffects])
 ]
 };

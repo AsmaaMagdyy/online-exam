@@ -3,7 +3,7 @@ import { Dialog } from 'primeng/dialog';
 import { Button } from "primeng/button";
 import { Store } from '@ngrx/store';
 import { Iquestions } from '../../../core/interfaces/iquestions';
-import { interval, map, Subscription, takeWhile } from 'rxjs';
+import { interval, map, Subscription, takeWhile, tap } from 'rxjs';
 import {setUserChoices } from '../../../store/questions/questions.actions';
 import { Iexam } from '../../../core/interfaces/iexam';
 import { IuserChoices } from '../../../core/interfaces/iuser-choices';
@@ -36,9 +36,11 @@ export class QuestionsComponent implements OnInit ,OnDestroy {
   selectedAnswers: { [key: number]: string } = {}; // key = question index
   _loggingService = inject(LoggingService);
   _toastrService = inject(ToastrService);
-  remainingTime: string = '00:00';
+  remainingSeconds: number = 0;
+
   timerSub!: Subscription;
   questionsSub!:Subscription;
+  remainingTime!: string;
 
 
   getAllQuestionsOnExam() {
@@ -125,17 +127,20 @@ export class QuestionsComponent implements OnInit ,OnDestroy {
   }
 
   startCountdown(totalSeconds: number): void {
-    this.timerSub = interval(1000).pipe(
-      map(elapsed => totalSeconds - elapsed),
-      takeWhile(secondsLeft => secondsLeft >= 0),
-      map(secondsLeft => this.formatTime(secondsLeft))
-    ).subscribe(formatted => {
-      this.remainingTime = formatted;
-
-      if (formatted === '00:30') {
+ this.timerSub = interval(1000).pipe(
+    map(elapsed => totalSeconds - elapsed),
+    takeWhile(secondsLeft => secondsLeft >= 0),
+    tap(secondsLeft => {
+      this.remainingSeconds = secondsLeft;
+      if (secondsLeft === 30) {
         this.handleTimeUp();
       }
-    });
+    }),
+    map(secondsLeft => this.formatTime(secondsLeft))
+  ).subscribe(formatted => {
+    this.remainingTime = formatted;
+  });
+    
   }
 
   formatTime(totalSeconds: number): string {
