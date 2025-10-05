@@ -10,6 +10,7 @@ import { RouterLink } from '@angular/router';
   imports: [RouterLink],
   templateUrl: './dash-board.component.html',
   styleUrl: './dash-board.component.scss'
+  
 })
 export class DashBoardComponent implements OnInit, OnDestroy {
 

@@ -19,7 +19,8 @@ import { ShowWrongUserResultsComponent } from "../../../shared/components/show-w
   selector: 'app-exams',
   imports: [ButtonModule, Dialog, BlueButtonComponent, QuestionsComponent, ScoreComponent, ShowWrongUserResultsComponent],
   templateUrl: './exams.component.html',
-  styleUrl: './exams.component.scss'
+  styleUrl: './exams.component.scss',
+  
 })
 export class ExamsComponent implements OnInit, OnDestroy {
   examName: WritableSignal<string> = signal('');
