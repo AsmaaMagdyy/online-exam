@@ -5,7 +5,7 @@
     </div>
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-5 mt-5">
         @for (subject of subjectsList(); track subject._id) {
-            <div class="text-white relative cursor-pointer" [routerLink]="['/exams']" [queryParams]="{subject: subject._id}">
+            <div data-idTesting="subjectId" class="text-white relative cursor-pointer" [routerLink]="['/exams']" [queryParams]="{subject: subject._id}">
                 <img [src]="subject.icon" class="w-full" alt="course photo">
                 <div class="bg-[#1100FF66] rounded-[8.44px] backdrop-blur-[27px] p-4 absolute bottom-3.5 start-1/2 -translate-x-1/2 w-[90%]">
                     <h6 class="font-bold text-[13.51px]">{{subject.name}}</h6>

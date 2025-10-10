@@ -24,6 +24,7 @@ export class SubjectsService {
           return res.subjects;
         }))
   }
+  
   getSingleSubject(subjectId:string): Observable<Isubject> {
     return this._httpClient.get<ISingleSubjectRes>(`${environment.baseUrl}/subjects/${subjectId}`)
         .pipe(map((res:ISingleSubjectRes)=>{
