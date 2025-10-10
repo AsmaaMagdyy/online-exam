@@ -96,7 +96,7 @@
     </div>
     <span class="text-[#313131] self-center text-end">Already have an account? <a class="text-maincolor cursor-pointer"
         routerLink="/login">Login</a></span>
-    <app-blue-button label="Create Account"></app-blue-button>
+    <app-blue-button [form]="true" (clicked)="onSignInClick()" label="Create Account"></app-blue-button>
   </form>
 
 </div>
